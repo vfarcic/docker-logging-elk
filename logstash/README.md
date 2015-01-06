@@ -1,7 +1,7 @@
 LogSTash
 ========
 
-To run the LogStash linked to ElasticSearch container:
+To run LogStash linked to the ElasticSearch container:
 
 ```bash
 export CONF_PATH=$PWD/logstash.conf

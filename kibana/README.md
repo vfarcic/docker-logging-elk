@@ -1,7 +1,7 @@
 LogSTash
 ========
 
-To run the Kibana linked to ElasticSearch container:
+To run Kibana linked to the ElasticSearch container:
 
 ```bash
 export PORT=9201
