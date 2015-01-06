@@ -1,15 +1,5 @@
 #!/bin/bash
 
-# ElasticSearch
-export DATA_DIR=/tmp/data
-export PORT=9200
-sudo docker build -t vfarcic/elasticsearch .
-sudo docker run -d --name elasticsearch \
-  -v $DATA_DIR:/opt/elasticsearch/data \
-  -p $PORT:9200 \
-  vfarcic/elasticsearch
-sudo docker rm -f elasticsearch
-
 # LogStash
 export CONF_PATH=/home/vfarcic/IdeaProjects/monitoring/logstash/logstash.conf
 export LOGS_DIR=/home/vfarcic/IdeaProjects/monitoring/logstash/logs
