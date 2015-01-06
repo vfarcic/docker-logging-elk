@@ -1,7 +1,0 @@
-- name: Container is running
-  docker:
-    image: "vfarcic/bdd"
-    name: "bdd"
-    state: "running"
-    ports: "{{ ports }}"
-  tags: [bdd]

@@ -1,4 +1,4 @@
-To start the ElasticSearch server:
+To create the VM with all containers:
 
 ```bash
 cd vagrant/monitoring
