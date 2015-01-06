@@ -25,4 +25,4 @@ function (Settings) {
     ]
   });
 });" >/usr/share/nginx/html/config.js
-nginx -c /etc/nginx/nginx.conf
+nginx -c /etc/nginx/nginx.conf -g "daemon off;"
