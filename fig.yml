@@ -1,7 +1,7 @@
 db:
   image: vfarcic/elasticsearch
   volumes:
-    - /data/elasticsearch:/opt/elasticsearch/data
+    - /data:/opt/elasticsearch/data
   ports:
     - 9200:9200
 app:

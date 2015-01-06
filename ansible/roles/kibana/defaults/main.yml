@@ -1,0 +1,4 @@
+links:
+  - 'elasticsearch:db'
+ports:
+  - '9201:80'

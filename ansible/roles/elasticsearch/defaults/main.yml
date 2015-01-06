@@ -1,0 +1,4 @@
+volumes:
+  - '/data:/opt/elasticsearch/data'
+ports:
+  - '9200:9200'
