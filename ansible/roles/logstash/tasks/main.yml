@@ -12,4 +12,5 @@
     name: "logstash"
     state: "running"
     volumes: "{{ volumes }}"
+    links: "{{ links }}"
   tags: [logstash]

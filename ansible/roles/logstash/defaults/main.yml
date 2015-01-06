@@ -5,3 +5,6 @@ files: [
 volumes:
   - /opt/logstash/logstash.conf:/opt/logstash/logstash.conf
   - /opt/logstash/logs:/opt/logstash/logs
+
+links:
+  - elasticsearch:db
