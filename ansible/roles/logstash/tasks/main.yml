@@ -1,0 +1,13 @@
+- name: Files are present
+  copy:
+    src={{ item.src }}
+    dest={{ item.desc }}
+  with_items: files
+  tags: [logstash]
+- name: Container is running
+  docker:
+    image: "vfarcic/logstash"
+    name: "logstash"
+    state: "running"
+    volumes: "{{ volumes }}"
+  tags: [logstash]
