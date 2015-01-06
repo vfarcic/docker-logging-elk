@@ -1,7 +1,9 @@
+- name: Directory is present
+  file: path=/opt/logstash/logs state=directory
 - name: Files are present
   copy:
     src={{ item.src }}
-    dest={{ item.desc }}
+    dest={{ item.dest }}
   with_items: files
   tags: [logstash]
 - name: Container is running

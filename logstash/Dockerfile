@@ -13,5 +13,4 @@ RUN wget https://download.elasticsearch.org/logstash/logstash/logstash-1.4.2.tar
     rm logstash-1.4.2.tar.gz && \
     ln -s logstash-1.4.2 logstash
 WORKDIR /opt/logstash
-ENTRYPOINT ["bin/logstash"]
-CMD ["-f", "logstash.conf"]
+CMD ["bin/logstash", "-f", "logstash.conf"]
