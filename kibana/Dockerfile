@@ -14,4 +14,4 @@ RUN wget https://download.elasticsearch.org/kibana/kibana/kibana-3.1.2.tar.gz &&
     rm -rf kibana-3.1.2
 
 EXPOSE 80
-CMD ["nginx -g 'daemon off;'"]
+CMD ["nginx", "-g", "'daemon off;'"]
