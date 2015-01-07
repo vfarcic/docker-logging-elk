@@ -13,7 +13,5 @@ RUN wget https://download.elasticsearch.org/kibana/kibana/kibana-3.1.2.tar.gz &&
     mv kibana-3.1.2/* /usr/share/nginx/html && \
     rm -rf kibana-3.1.2
 
-ADD run.sh /usr/local/bin/run
-RUN chmod +x /usr/local/bin/run
 EXPOSE 80
-CMD ["run"]
+CMD ["nginx -c /etc/nginx/nginx.conf -g 'daemon off;'"]

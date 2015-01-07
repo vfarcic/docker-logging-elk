@@ -4,5 +4,4 @@
     name: "kibana"
     state: "running"
     ports: "{{ ports }}"
-    links: "{{ links }}"
   tags: [kibana]

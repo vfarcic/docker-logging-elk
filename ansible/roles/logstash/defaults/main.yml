@@ -2,6 +2,7 @@ files: [
          { src: 'logstash.conf', dest: '/opt/logstash/logstash.conf' },
          { src: 'access', dest: '/opt/logstash/logs/access' }
        ]
+
 volumes:
   - /opt/logstash/logstash.conf:/opt/logstash/logstash.conf
   - /opt/logstash/logs:/opt/logstash/logs
