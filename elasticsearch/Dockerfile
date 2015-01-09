@@ -17,4 +17,5 @@ RUN wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elastics
 
 WORKDIR /opt/elasticsearch
 EXPOSE 9200
+EXPOSE 9300
 CMD ["bin/elasticsearch"]
