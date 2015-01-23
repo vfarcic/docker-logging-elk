@@ -12,6 +12,7 @@ RUN wget https://download.elasticsearch.org/logstash/logstash/logstash-1.4.2.tar
     tar zxvf logstash-1.4.2.tar.gz && \
     rm logstash-1.4.2.tar.gz
 RUN ln -s logstash-1.4.2 ls
+RUN /ls/bin/plugin install contrib
 
 EXPOSE 514 514/udp 9200 9292 9300
 WORKDIR /ls
