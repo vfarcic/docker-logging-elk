@@ -14,6 +14,6 @@ RUN wget https://download.elasticsearch.org/logstash/logstash/logstash-1.4.2.tar
 RUN ln -s logstash-1.4.2 ls
 RUN /ls/bin/plugin install contrib
 
-EXPOSE 514 514/udp 9200 9292 9300 25826
+EXPOSE 514 514/udp 9200 9292 9300 25826 25826/udp
 WORKDIR /ls
 CMD ["bin/logstash", "-f", "logstash.conf"]

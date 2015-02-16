@@ -1,4 +1,4 @@
-LogSTash
+LogStash
 ========
 
 To run LogStash linked to the ElasticSearch container:
