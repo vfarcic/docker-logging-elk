@@ -35,23 +35,32 @@ sudo docker run -d --name logstash \
   vfarcic/logstash
 ```
 
-To output Docker logs to syslog and from there to LogStash (works only in Docker 1.6+:
+To output Docker logs to syslog and from there to LogStash (works only in Docker 1.6+):
 
 ```bash
+# SysLog
 echo "*.* @localhost:25826" | sudo tee /etc/rsyslog.d/10-logstash.conf
 sudo service rsyslog restart
 
-# Start a container that produces some logs to stdout/stderr
-sudo docker run -d --name bdd \
-  -p 9000:9000 \
-  --log-driver=syslog \
-  vfarcic/bdd
+# ElasticSearch
+export DATA_DIR=/data/elasticsearch
+export PORT=9200
+sudo docker run -d --name elasticsearch \
+  -v $DATA_DIR:/opt/elasticsearch/data \
+  -p $PORT:9200 \
+  vfarcic/elasticsearch
 
-# Start LogStash
+# LogStash
 export CONF_PATH=$PWD/syslog.conf
 sudo docker run -d --name logstash \
   -v $CONF_PATH:/ls/logstash.conf \
   -p 25826:25826 \
   -p 25826:25826/udp \
   vfarcic/logstash
+  
+# Start a container that produces some logs to stdout/stderr
+sudo docker run -d --name bdd \
+  -p 9000:9000 \
+  --log-driver=syslog \
+  vfarcic/bdd
 ```
