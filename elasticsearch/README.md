@@ -10,7 +10,7 @@ sudo docker run -d vfarcic/elasticsearch
 To run ElasticSSearch container with data stored on the host and port defined:
 
 ```bash
-export DATA_DIR=/tmp/data
+export DATA_DIR=/data/elasticsearch
 export PORT=9200
 sudo docker run -d --name elasticsearch \
   -v $DATA_DIR:/opt/elasticsearch/data \

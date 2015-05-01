@@ -8,10 +8,11 @@ RUN apt-get -y install wget openjdk-7-jdk && \
     apt-get clean all
 
 WORKDIR /opt
-RUN wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.1.1.tar.gz && \
-    tar zxvf elasticsearch-1.1.1.tar.gz && \
-    rm elasticsearch-1.1.1.tar.gz && \
-    ln -s /opt/elasticsearch-1.1.1 elasticsearch && \
+ENV VERSION 1.5.2
+RUN wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-$VERSION.tar.gz && \
+    tar zxvf elasticsearch-$VERSION.tar.gz && \
+    rm elasticsearch-$VERSION.tar.gz && \
+    ln -s /opt/elasticsearch-$VERSION elasticsearch && \
     cd elasticsearch && \
     bin/plugin -install lmenezes/elasticsearch-kopf
 
