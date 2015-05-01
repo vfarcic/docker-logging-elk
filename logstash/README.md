@@ -49,6 +49,15 @@ sudo docker run -d --name elasticsearch \
   -v $DATA_DIR:/opt/elasticsearch/data \
   -p $PORT:9200 \
   vfarcic/elasticsearch
+curl http://localhost:${PORT}/_search?pretty
+  
+# Kibana
+export PORT=9201
+sudo docker run -d --name kibana \
+  -p $PORT:80 \
+  --link elasticsearch:db \
+  vfarcic/kibana
+# Open localhost:9201 in browser
 
 # LogStash
 export CONF_PATH=$PWD/syslog.conf

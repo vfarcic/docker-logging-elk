@@ -11,7 +11,7 @@ ENV VERSION 4.0.2
 RUN wget https://download.elastic.co/kibana/kibana/kibana-$VERSION-linux-x64.tar.gz && \
     tar zxvf kibana-$VERSION-linux-x64.tar.gz && \
     rm kibana-$VERSION-linux-x64.tar.gz && \
-    mv kibana-$VERSION/* /usr/share/nginx/html && \
+    mv kibana-$VERSION-linux-x64/* /usr/share/nginx/html && \
     rm -rf kibana-$VERSION
 
 EXPOSE 80
