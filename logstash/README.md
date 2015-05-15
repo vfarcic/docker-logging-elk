@@ -35,49 +35,14 @@ sudo docker run -d --name logstash \
   vfarcic/logstash
 ```
 
-To output Docker logs to syslog and from there to LogStash (works only in Docker 1.6+):
+To output Docker logs to syslog and from there to LogStash:
 
 ```bash
-# SysLog
-echo "*.* @localhost:25826" | sudo tee /etc/rsyslog.d/10-logstash.conf
-sudo service rsyslog restart
-
-# ElasticSearch
-export DATA_DIR=/data/elasticsearch
-export ES_PORT=9200
-sudo docker run -d --name elasticsearch \
-  -v $DATA_DIR:/opt/elasticsearch/data \
-  -p $ES_PORT:9200 \
-  vfarcic/elasticsearch
-curl http://localhost:${ES_PORT}/_search?pretty
-  
-# LogStash
-export CONF_PATH=$PWD/syslog.conf
-sudo docker run -d --name logstash \
-  --link elasticsearch:db \
-  -v $CONF_PATH:/ls/logstash.conf \
-  -p 25826:25826 \
-  -p 25826:25826/udp \
-  vfarcic/logstash
-sudo docker logs -f logstash
-  
-# Start a container that produces some logs to stdout/stderr
-sudo docker run -d --name bdd \
-  -p 9000:9000 \
-  --log-driver=syslog \
-  vfarcic/bdd
-sudo docker logs -f logstash
-curl http://localhost:${ES_PORT}/_search?pretty
-  
-# Kibana
-export KIBANA_PORT=9201
-sudo docker run -d --name kibana \
-  -p $KIBANA_PORT:5601 \
-  --link elasticsearch:db \
-  vfarcic/kibana
-# Open http://localhost:9201 in browser
-
-# TODO: Kibana instructions
-# TODO: Export Kibana settings
-# TODO: rsyslog to remote server
+vagrant up elk-docker
 ```
+
+Open http://localhost:5601 in browser
+
+TODO: Rewrite Vagrantfile to bash
+TODO: Export Kibana settings
+TODO: Try rsyslog to remote server
