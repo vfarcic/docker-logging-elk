@@ -1,8 +1,9 @@
 - name: Container is running
   docker:
-    image: "vfarcic/elasticsearch"
-    name: "elasticsearch"
-    state: "running"
-    ports: "{{ ports }}"
-    volumes: "{{ volumes }}"
+    image: elasticsearch
+    name: elasticsearch
+    ports:
+      - 9200:9200
+    volumes:
+      - /data/elasticsearch:/usr/share/elasticsearch/data
   tags: [elasticsearch]

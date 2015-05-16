@@ -1,7 +1,9 @@
 - name: Container is running
   docker:
-    image: "vfarcic/kibana"
-    name: "kibana"
-    state: "running"
-    ports: "{{ ports }}"
+    image: vfarcic/kibana
+    name: kibana
+    ports:
+      - 5601:5601
+    links:
+      - elasticsearch:db
   tags: [kibana]

@@ -1,0 +1,3 @@
+packages:
+  - rsyslog
+  - logrotate

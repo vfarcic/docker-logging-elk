@@ -1,0 +1,2 @@
+elk_ip: 10.100.199.200
+docker_syslog: false

@@ -1,8 +1,8 @@
 - hosts: all
-  remote_user: vagrant
   sudo: yes
   roles:
     - docker
     - elasticsearch
-    - kibana
     - logstash
+    - kibana
+    - rsyslog

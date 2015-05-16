@@ -1,0 +1,7 @@
+- name: Container is running
+  docker:
+    image: vfarcic/bdd
+    name: bdd
+    ports:
+      - 9000:9000
+  tags: [logstash]

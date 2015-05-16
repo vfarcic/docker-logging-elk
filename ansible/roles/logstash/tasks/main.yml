@@ -1,16 +1,28 @@
-- name: Directory is present
-  file: path=/opt/logstash/logs state=directory
-- name: Files are present
-  copy:
-    src={{ item.src }}
-    dest={{ item.dest }}
-  with_items: files
+- name: Directories are present
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items: directories
   tags: [logstash]
+
+- name: Config file is present
+  copy:
+    src: syslog.conf
+    dest: "{{ conf_dir }}/syslog.conf"
+  tags: [logstash]
+
 - name: Container is running
   docker:
-    image: "vfarcic/logstash"
-    name: "logstash"
-    state: "running"
-    volumes: "{{ volumes }}"
-    links: "{{ links }}"
+    image: logstash
+    name: logstash
+    volumes:
+      - "{{ conf_dir }}:/conf"
+    expose:
+      - 25826
+    ports:
+      - 25826:25826
+      - 25826:25826/udp
+    links:
+      - elasticsearch:db
+    command: "logstash -f /conf/syslog.conf"
   tags: [logstash]

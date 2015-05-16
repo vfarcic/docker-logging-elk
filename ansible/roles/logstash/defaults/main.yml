@@ -1,11 +1,5 @@
-files: [
-         { src: 'logstash.conf', dest: '/opt/logstash/logstash.conf' },
-         { src: 'access', dest: '/opt/logstash/logs/access' }
-       ]
+conf_dir: /data/logstash/config
 
-volumes:
-  - /opt/logstash/logstash.conf:/opt/logstash/logstash.conf
-  - /opt/logstash/logs:/opt/logstash/logs
-
-links:
-  - elasticsearch:db
+directories:
+  - /data/logstash
+  - "{{ conf_dir }}"
