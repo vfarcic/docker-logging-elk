@@ -1,2 +1,3 @@
 elk_ip: 10.100.199.200
+es_port: 9200
 docker_syslog: false

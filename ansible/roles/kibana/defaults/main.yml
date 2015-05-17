@@ -1,0 +1,6 @@
+backup_dir: /data/kibana/backup
+
+directories:
+  - /data
+  - /data/kibana
+  - "{{ backup_dir }}"

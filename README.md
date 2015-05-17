@@ -13,6 +13,7 @@ vagrant up docker-node
 ElasticSearch: [http://localhost:9200/_search?pretty](http://localhost:9200/_search?pretty)
 Kibana: [http://localhost:5601/](http://localhost:5601/)
 
-TODO: Export Kibana settings
-TODO: Try rsyslog to remote server
-TODO: Rename to docker-logging
+TODO
+====
+
+* Export/import Kibana settings**
