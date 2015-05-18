@@ -4,6 +4,7 @@
     state: latest
     install_recommends: no
   with_items: packages
+  tags: [rsyslog]
 
 - name: Config file is present
   template:
