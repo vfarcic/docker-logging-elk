@@ -13,7 +13,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     node.vm.network "forwarded_port", guest: 9000, host: 9000
     node.vm.network "forwarded_port", guest: 9200, host: 9200
     node.vm.network "forwarded_port", guest: 25826, host: 25826
-    # node.vm.provision :shell, inline: "wget -qO- https://get.docker.com/ | sh"
+    node.vm.provision :shell, inline: "wget -qO- https://get.docker.com/ | sh"
     node.vm.provision :shell, inline: "ln -s /vagrant/conf conf"
   end
   config.vm.define "elk" do |node|
