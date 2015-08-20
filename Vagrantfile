@@ -15,6 +15,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     node.vm.network "forwarded_port", guest: 25826, host: 25826
     node.vm.provision :shell, inline: "wget -qO- https://get.docker.com/ | sh"
     node.vm.provision :shell, inline: "ln -s /vagrant/conf conf"
+    node.vm.provider "virtualbox" do |v|
+      v.memory = 1024
+    end
   end
   config.vm.define "elk" do |node|
     node.vm.hostname = "elk"
@@ -24,6 +27,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     node.vm.network "forwarded_port", guest: 25826, host: 25826
     node.vm.provision :shell, path: "ansible.sh"
     node.vm.provision :shell, inline: 'ansible-playbook /vagrant/ansible/monitoring.yml -c local -v'
+    node.vm.provider "virtualbox" do |v|
+      v.memory = 2048
+    end
   end
   config.vm.define "docker-node" do |node|
     node.vm.hostname = "docker-node"
@@ -31,8 +37,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     node.vm.network "forwarded_port", guest: 9000, host: 9000
     node.vm.provision :shell, path: "ansible.sh"
     node.vm.provision :shell, inline: 'ansible-playbook /vagrant/ansible/docker-node.yml -c local -v'
-  end
-  config.vm.provider "virtualbox" do |v|
-    v.memory = 2048
+    node.vm.provider "virtualbox" do |v|
+      v.memory = 2048
+    end
   end
 end

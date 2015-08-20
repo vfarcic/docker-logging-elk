@@ -13,7 +13,13 @@ vagrant up docker-node
 ElasticSearch: [http://localhost:9200/_search?pretty](http://localhost:9200/_search?pretty)
 Kibana: [http://localhost:5601/](http://localhost:5601/)
 
-# TODO
+TODO
+====
+
+* Create collectd container
+* Write collectd + ELK article
+* Link to the ELK article
+
 
 ```bash
 ## collectd ##
@@ -32,9 +38,5 @@ sudo cp /vagrant/conf/collectd.conf /etc/collectd/collectd.conf
 sudo service collectd restart
 
 ## kibana ##
-sudo docker run -d --name kibana -p 5601:5601 --link elasticsearch:db vfarcic/kibana
+sudo docker run -d --name kibana -p 5601:5601 --link elasticsearch:elasticsearch kibana
 ```
-
-* Add syslog
-* Add swap
-* Add interface
