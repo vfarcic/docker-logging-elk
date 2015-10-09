@@ -1,32 +1,36 @@
-- name: Container is running
-  docker:
-    image: vfarcic/kibana
-    name: kibana
-    ports:
-      - 5601:5601
-    links:
-      - elasticsearch:db
-  register: kibana_result
-  tags: [kibana]
+---
 
 - name: Directories are present
   file:
     dest: "{{ item }}"
     state: directory
-  with_items: directories
+  with_items: kibana_directories
   tags: [kibana]
 
-- name: Backup is present
-  copy:
-    src: es-kibana.json
-    dest: "{{ backup_dir }}/es-kibana.json"
-  tags: [kibana]
 
-- name: Backup is restored
+- name: Container is running
   docker:
-    volumes:
-      - "{{ backup_dir }}:/data"
-    image: vfarcic/elastic-dump
-    command: --input=/data/es-kibana.json --output=http://{{ elk_ip }}:{{ es_port }}/.kibana --type=data
-  when: kibana_result.changed
+    image: "kibana"
+    name: kibana
+    ports:
+      - 5601:5601
+    links:
+      - "elasticsearch"
+  #register: kibana_result
   tags: [kibana]
+
+
+#- name: Backup is present
+#  copy:
+#    src: es-kibana.json
+#    dest: "{{ backup_dir }}/es-kibana.json"
+#  tags: [kibana]
+#
+#- name: Backup is restored
+#  docker:
+#    volumes:
+#      - "{{ backup_dir }}:/data"
+#    image: vfarcic/elastic-dump
+#    command: --input=/data/es-kibana.json --output=http://{{ elk_ip }}:{{ es_port }}/.kibana --type=data
+#  when: kibana_result.changed
+#  tags: [kibana]

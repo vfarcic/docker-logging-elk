@@ -1,6 +1,0 @@
-conf_dir: /data/logstash/config
-
-directories:
-  - /data
-  - /data/logstash
-  - "{{ conf_dir }}"

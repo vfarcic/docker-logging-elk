@@ -1,3 +1,15 @@
 elk_ip: 10.100.199.200
 es_port: 9200
 docker_syslog: false
+
+kibana_backup_dir: /data/kibana/backup
+kibana_directories:
+  - /data
+  - /data/kibana
+  - "{{ kibana_backup_dir }}"
+
+logstash_conf_dir: /data/logstash/config
+logstash_directories:
+  - /data
+  - /data/logstash
+  - "{{ logstash_conf_dir }}"
