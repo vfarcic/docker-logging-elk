@@ -40,3 +40,7 @@ sudo service collectd restart
 ## kibana ##
 sudo docker run -d --name kibana -p 5601:5601 --link elasticsearch kibana
 ```
+
+### Tested on ###
+CentOS 6.5
+Ubuntu 14.04
