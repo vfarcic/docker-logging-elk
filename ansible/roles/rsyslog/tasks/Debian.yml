@@ -1,0 +1,28 @@
+---
+
+- name: Packages are present
+  apt:
+    name: "{{ item }}"
+    state: latest
+    install_recommends: no
+  with_items:
+    - rsyslog
+    - logrotate
+  tags: [rsyslog]
+
+
+- name: Config file is present
+  template:
+    src: 10-logstash.conf.j2
+    dest: /etc/rsyslog.d/10-logstash.conf
+  notify:
+    - "restart rsyslog service"
+  tags: [rsyslog]
+
+
+- name: Service is enabled and started
+  service:
+    name: rsyslog
+    enabled: yes
+    state: started
+  tags: [rsyslog]

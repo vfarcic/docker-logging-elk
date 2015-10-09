@@ -1,3 +1,5 @@
+---
+
 - name: Container is running
   docker:
     image: elasticsearch

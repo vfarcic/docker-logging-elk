@@ -1,0 +1,61 @@
+---
+
+#- name: Add Docker official repository
+#  template:
+#    src: "docker.repo.j2"
+#    dest: "/etc/yum.repos.d/docker.repo"
+#  tags: [docker]
+
+
+- name: EPEL repo is present
+  yum:
+    name: "http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm"
+    state: present
+  tags: [docker]
+
+
+- name: device-mapper-devel package upgrade needed
+  yum:
+    name: device-mapper-devel
+    state: present
+  when: ansible_distribution == 'CentOS' and ansible_distribution_version == '6.5'
+
+
+- name: Docker is present
+  yum:
+    name: docker-io
+    state: present
+  tags: [docker]
+
+
+- name: Python-pip is present
+  yum:
+    name: python-pip
+    state: present
+  tags: [docker]
+
+
+- name: Docker-py is present
+  pip:
+    name: docker-py
+    version: 0.4.0
+    state: present
+  tags: [docker]
+
+
+- name: Config files are present
+  template:
+    src: docker.conf.redhat.j2
+    dest: /etc/sysconfig/docker
+  when: docker_syslog
+  notify:
+    - "restart docker service"
+  tags: [docker]
+
+
+- name: Service is enabled and started
+  service:
+    name: docker
+    enabled: yes
+    state: started
+  tags: [docker]
