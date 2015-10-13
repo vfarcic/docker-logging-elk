@@ -9,10 +9,21 @@
 
 
 - name: Config file is present
-  copy:
-    src: syslog.conf
+  template:
+    src: conf.j2
     dest: "{{ logstash_conf_dir }}/syslog.conf"
   tags: [logstash]
+
+
+- name: Copy SSL key and cert for logstash-forwarder
+  copy:
+    src: "{{ item }}"
+    dest: "{{ logstash_conf_dir }}/{{ item }}"
+    mode: 0644
+  with_items:
+    - "{{ logstash_ssl_key_file }}"
+    - "{{ logstash_ssl_certificate_file }}"
+  #notify: restart logstash
 
 
 - name: Container is running
@@ -23,9 +34,12 @@
       - "{{ logstash_conf_dir }}:/conf"
     expose:
       - 25826
+      - 5000
     ports:
       - 25826:25826
       - 25826:25826/udp
+      - 5000:5000
+    restart_policy: always
     links:
       - "elasticsearch"
     command: "logstash -f /conf/syslog.conf"

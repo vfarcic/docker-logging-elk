@@ -3,6 +3,13 @@ input {
     type => syslog
     port => 25826
   }
+
+  lumberjack {
+    port            => {{ logstash_forwarder_logstash_server_port }}
+    ssl_certificate => "/conf/{{ logstash_ssl_certificate_file }}"
+    ssl_key         => "/conf/{{ logstash_ssl_key_file }}"
+    type            => lumberjack
+  }
 }
 
 filter {
