@@ -8,4 +8,5 @@
       - "{{ es_port }}:9200"
     volumes:
       - /data/elasticsearch:/usr/share/elasticsearch/data
+    restart_policy: always
   tags: [elasticsearch]
