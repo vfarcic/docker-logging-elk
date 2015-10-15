@@ -1,3 +1,28 @@
-elk_ip: 10.100.199.200
+elk_ip: 10.8.8.11
 es_port: 9200
 docker_syslog: false
+
+data_dir: /data
+kibana_backup_dir: "{{ data_dir }}/kibana/backup"
+kibana_directories:
+  - "{{ data_dir }}"
+  - "{{ data_dir }}/kibana"
+  - "{{ kibana_backup_dir }}"
+
+logstash_ssl_dir: /etc/logstash
+logstash_conf_dir: "{{ data_dir }}/logstash/conf"
+logstash_directories:
+  - "{{ data_dir }}"
+  - "{{ data_dir }}/logstash"
+  - "{{ logstash_conf_dir }}"
+logstash_ssl_certificate_file: forwarder.crt
+logstash_ssl_key_file: forwarder.key
+
+logstash_forwarder_logstash_server: elk
+logstash_forwarder_logstash_server_port: 5000
+logstash_forwarder_ssl_certificate_file: forwarder.crt
+logstash_forwarder_files:
+  - paths:
+      - /var/log/messages
+    fields:
+      type: syslog

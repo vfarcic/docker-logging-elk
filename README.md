@@ -31,12 +31,16 @@ sudo mkdir -p /data/elasticsearch
 sudo docker run -d --name elasticsearch -p 9200:9200 -v /data/elasticsearch:/usr/share/elasticsearch/data elasticsearch
     
 ## logstash ##
-sudo docker run -d --name logstash --expose 25826 -p 25826:25826 -p 25826:25826/udp -v $PWD/conf:/conf --link elasticsearch:db logstash logstash -f /conf/logstash_collectd.conf
+sudo docker run -d --name logstash --expose 25826 -p 25826:25826 -p 25826:25826/udp -v $PWD/conf:/conf --link elasticsearch logstash logstash -f /conf/logstash_collectd.conf
 
 ## restart collectd ##
 sudo cp /vagrant/conf/collectd.conf /etc/collectd/collectd.conf
 sudo service collectd restart
 
 ## kibana ##
-sudo docker run -d --name kibana -p 5601:5601 --link elasticsearch:elasticsearch kibana
+sudo docker run -d --name kibana -p 5601:5601 --link elasticsearch kibana
 ```
+
+### Tested on ###
+CentOS 6.5
+Ubuntu 14.04
