@@ -1,6 +1,6 @@
 - name: Container is running
   docker:
-    image: vfarcic/kibana
+    image: kibana
     name: kibana
     ports:
       - 5601:5601
